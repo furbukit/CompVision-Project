@@ -3,7 +3,11 @@
 # You can use this file to define the logic for handling HTTP requests and returning HTTP responses.
 from django.shortcuts import render
 from django.http import HttpResponse
+# Create your views here.
+
+def index(request):
+    # Page from the theme 
+    return render(request, 'pages/index.html')
 
 def hello(request):
     return HttpResponse("Hello, world!")
-# Create your views here.

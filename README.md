@@ -100,7 +100,7 @@ To run the app then type<br>
 Then go to your browser of choice and type<br>
 `http://localhost:8000/`<br>
 
-You should now have access to the web-app! You will need to restart the development server using the `python manage.py runserver` command every time you make a change to the code base on VSCode
+You should now have access to the web-app! You shouldn'tneed to restart the development server  every time you make a change to the code base on VSCode, just refresh the web page to see your changes.
 
 The Hello World example that I have created is located on<br>
 `http://localhost:8000/hello`<br>
