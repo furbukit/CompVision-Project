@@ -43,7 +43,15 @@ Our terminal will then switch to have `(env)` in front of it signifying we are u
 To exit a virtual environment just type<br>
 `deactivate`
 
-## 3. Installing Requirements
+## 3. Installing Requirements and Dependencies
+
+For some reason Django wants C++ installed on the computer beforehand so I will add that here.  
+1. install Microsoft Visual C++ 14.0 or greater from the `Microsoft C++ Build Tools` package using the following link<br>
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+2. Launch .exe file and wait for install to complete
+3. When the Visual Studio Installer GUI pops up, select 'Desktop development with C++' and Install
+4. Wait for install to complete
+
 We then will want to install all the requirements (python libraries in this case) so that we can run the code
 
 To install requirements type <br>
