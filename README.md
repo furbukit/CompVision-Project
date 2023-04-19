@@ -49,7 +49,7 @@ There are only two kinds of 'requests' I want you to care about.  Pull requests 
 
 You pull before you start coding, and then push when you finish coding.
 
-Here's the command for pulling (I know you need it @Will)
+Here's the command for pulling (I know you need it @Will) (no u @Furbukit)
 `git pull origin main`
 
 BEFORE YOU PUSH, you want to add your changes and then commit your changes.
