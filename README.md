@@ -76,3 +76,24 @@ Then you can push your changes<br>
 Whenever you install a new python library you will need to tell the requirements.txt file that you have added a new dependancy.  Type the following command whenever you do another `pip install` command.
 
 `pip freeze > requirements.txt`
+
+## 5. Working with Django
+
+Django is a high-level web framework written in Python that follows the Model-View-Controller (MVC) architectural pattern. It is designed to make it easier to build complex, database-driven web applications quickly and efficiently.
+
+All the python files for our web-app are located in ./cits4402proj1/app 
+
+When in the CompVision-Proejct directory, navigate into the Django project by typing the following<br>
+`cd cits4402proj1`<br>
+
+To run the app then type<br>
+`python manage.py runserver`<br>
+
+Then go to your browser of choice and type<br>
+`http://localhost:8000/`<br>
+
+You should now have access to the web-app! You will need to restart the development server using the `python manage.py runserver` command every time you make a change to the code base on VSCode
+
+The Hello World example that I have created is located on<br>
+`http://localhost:8000/hello`<br>
+So if when you paste that in to your browser the webpage only contains "Hello, world!" then your installation and development server are working
