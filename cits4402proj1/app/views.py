@@ -11,3 +11,13 @@ def index(request):
 
 def hello(request):
     return HttpResponse("Hello, world!")
+
+def task_one(request):
+    return render(request, 'pages/task_one.html')
+
+def task_two(request):
+    return render(request, 'pages/task_two.html')
+
+def task_three(request):
+    return render(request, 'pages/task_three.html')
+

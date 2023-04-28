@@ -19,4 +19,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('hello/', views.hello, name='hello'),
+    path('task_one', views.task_one, name='task_one'),
+    path('task_two', views.task_one, name='task_two'),
+    path('task_three', views.task_one, name='task_three')
 ]
