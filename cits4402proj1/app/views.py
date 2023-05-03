@@ -23,7 +23,6 @@ def hello(request):
 def task_one(request):
     # Load the image as a NumPy array
     img = cv2.imread(image_path)
-
     processed_img = task1(img)
 
     # PROCESSED IMG SHOULD BE A NUMPY ARRAY HERE
