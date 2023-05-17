@@ -1,0 +1,9 @@
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+.base-layout {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
