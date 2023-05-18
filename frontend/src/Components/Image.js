@@ -7,7 +7,7 @@ export default function Image(props) {
     const handleImageRequest = () => {
       let url = "";
       if(props.isEdited){
-        url = `http://localhost:8000/get_image?path=${props.filePath}&edit=t`;
+        url = `http://localhost:8000/get_image?path=${props.filePath}&edit=t&segupper=${props.segUpper}&seglower=${props.segLower}&areaupper=${props.areaUpper}&arealower=${props.areaLower}&axisratio=${props.axisRatio}`;
       }
       else{
         url = `http://localhost:8000/get_image?path=${props.filePath}&edit=f`
@@ -24,7 +24,7 @@ export default function Image(props) {
     };
 
     handleImageRequest();
-  }, [props.filePath]);
+  }, [props.filePath, props.segUpper, props.segLower, props.areaUpper, props.areaLower, props.axisRatio]);
 
   return (
     <div>

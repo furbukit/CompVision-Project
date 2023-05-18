@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 
-const DualSlide = styled(Slider)(({ theme }) => ({
+const DualSlide = styled(Slider)(({ title, upperBound, lowerBound, onSliderChange }) => ({
     color: '#3a8589',
     height: 3,
     padding: '13px 0',
@@ -54,15 +54,31 @@ DualSliderThumbComponent.propTypes = {
     children: PropTypes.node,
 };
 
-export default function DualSlider() {
+export default function DualSlider({ title, start, stop, step, lowerBound, upperBound, onSliderChange }) {
+    const minRange = start;
+    const maxRange = stop;
+    const stepSize = step;
+
+    const marks = [];
+    for (let i = minRange; i <= maxRange; i += stepSize) {
+        if ((i - minRange) % (step*5) === 0) {
+            marks.push({ value: i, label: i.toString() });
+          }
+    }
+
     return (
-        <Box sx={{ m: 3 }}>
-        <Typography gutterBottom>Belarus</Typography>
+      <Box sx={{ m: 3 }}>
+        <Typography gutterBottom>{title}</Typography>
         <DualSlide
           slots={{ thumb: DualSliderThumbComponent }}
           getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-          defaultValue={[20, 40]}
+          value={[lowerBound, upperBound]}
+          onChange={onSliderChange}
+          min={minRange}
+          max={maxRange}
+          step={stepSize}
+          marks={marks}
         />
-        </Box>
-    )
+      </Box>
+    );
   }

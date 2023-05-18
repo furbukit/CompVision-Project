@@ -11,6 +11,8 @@ from django.templatetags.static import static
 from django.conf import settings
 import base64
 import numpy as np
+import io
+from PIL import Image
 
 # Create your views here.
 def index(request):
@@ -65,12 +67,23 @@ def get_image(request):
     image_file_path = os.path.abspath('app/data/' + image_path)
     print(image_file_path)
     print(f"EDITED: {edited}")
+
     if edited == 'f':
         response = FileResponse(open(image_file_path, 'rb'), content_type='image/png')
         response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         return response
     elif edited == 't':
-        response = FileResponse(open(image_file_path, 'rb'), content_type='image/png')
+        upper = int(request.GET.get('segupper'))
+        lower = int(request.GET.get("seglower"))
+        area_upper = int(request.GET.get('areaupper'))
+        area_lower = int(request.GET.get('arealower'))
+        axis_ratio = float(request.GET.get('axisratio'))
+        out = task1(image_file_path, upper, lower, area_upper, area_lower, axis_ratio)
+        pil_image = Image.fromarray(out)
+        image_stream = io.BytesIO()
+        pil_image.save(image_stream, format='PNG')
+        image_stream.seek(0)
+        response = FileResponse(image_stream, content_type='image/png')
         response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         return response
 
@@ -78,51 +91,3 @@ def get_image(request):
         response = HttpResponse("Image not found")
         response['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         return response
-"""
-def task_one(request):
-    print("WE GOT HERE")
-    path = os.path.abspath('app/static/data')
-    dropdown_options = create_nested_dropdown_options(path)
-
-    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        selected_image_path = request.POST.get('selected_image_path')
-        img_base64_original, img_base64_edited = process_image(selected_image_path)
-    else:
-        img_base64_original, img_base64_edited = process_image()
-    
-    context = {
-        'dropdown_options': dropdown_options,
-        'img_base64_edited': img_base64_edited,
-        'img_base64_original': img_base64_original,
-    }
-    print(img_base64_edited[-10:])
-    return render(request, 'pages/task_one.html', context)
-
-def task_two(request):
-    image_path = os.path.abspath('app/static/data/camera 11/2022_12_15_15_51_19_927_rgb_left.png')
-    # Load the image as a NumPy array
-    img = cv2.imread(image_path)
-
-    processed_img = task2(img)
-
-    # PROCESSED IMG SHOULD BE A NUMPY ARRAY HERE
-
-    _, buffer = cv2.imencode('.png', processed_img)
-    img_base64 = base64.b64encode(buffer).decode('utf-8')
-    context = {'img_base64': img_base64}
-    return render(request, 'pages/task_two.html', context)
-
-def task_three(request):
-    image_path = os.path.abspath('app/static/data/camera 11/2022_12_15_15_51_19_927_rgb_left.png')
-    # Load the image as a NumPy array
-    img = cv2.imread(image_path)
-
-    processed_img = task3(img)
-
-    # PROCESSED IMG SHOULD BE A NUMPY ARRAY HERE
-
-    _, buffer = cv2.imencode('.png', processed_img)
-    img_base64 = base64.b64encode(buffer).decode('utf-8')
-    context = {'img_base64': img_base64}
-    return render(request, 'pages/task_three.html', context)
-"""

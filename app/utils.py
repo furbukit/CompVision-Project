@@ -3,7 +3,7 @@ import cv2
 import base64
 import tempfile
 import numpy as np
-path = os.path.abspath('app/static/data')
+path = os.path.abspath('app/data')
 
 def create_nested_dropdown_options(path):
     """
@@ -39,7 +39,7 @@ def process_image(selected_image_path='camera 11/2022_12_15_15_51_19_927_rgb_lef
     return img_base64_original, img_base64_edited
 
 def base64_image(img):
-
+    print(img)
     _, buffer = cv2.imencode('.png', img)
     img_base64 = base64.b64encode(buffer).decode('utf-8')
     return img_base64

@@ -2,31 +2,26 @@ import numpy as np
 import pandas as pd
 import cv2
 import skimage
+import os
+from .utils import rough_segmentation_mask, connected_component_analysis, filter_clusters
 
+path = os.path.abspath('app/data')
 
-def task1(image):
+def task1(image, upper, lower, area_upper, area_lower, axis_ratio):
     # Performs CCA on the rough segmentation mask.
-    
-    return 0
+    # convert the image to OpenCV format
+    print(upper, lower, area_upper, area_lower, axis_ratio)
+    cv_image = cv2.imread(image)
+    rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
+    mask_img = rough_segmentation_mask(rgb_image, upper, lower)
+    connected_components, labels = connected_component_analysis(mask_img)
+    # Right up till here
+    out = filter_clusters(connected_components, area_lower, area_upper, axis_ratio)
+    print(out)
+    out = np.where(out != 0, 255, out)
 
-def rough_mask(thresh1, thresh2, image):
-    # Defines the rough segmentation mask.
-    # Converts input image to a NumPy array.
-    img = np.array(image)
-    
-    # Iterates through every pixel of image.
-    mask_img = np.array()
-    
-    for row in img:
-        img_row = np.array()
-        for col in row:
-            if np.min(col)<thresh1 or np.max(col)-np.min(col)>thresh2:
-                img_row.append(col)
-            else:
-                img_row.append(0)
-        mask_img.append(img_row)
-    return mask_img
-    
+
+    return out
 
 
 def task2(image):
