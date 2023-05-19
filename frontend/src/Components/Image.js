@@ -7,7 +7,7 @@ export default function Image(props) {
     const handleImageRequest = () => {
       let url = "";
       if(props.isEdited){
-        url = `http://localhost:8000/get_image?path=${props.filePath}&edit=t&segupper=${props.segUpper}&seglower=${props.segLower}&areaupper=${props.areaUpper}&arealower=${props.areaLower}&axisratio=${props.axisRatio}`;
+        url = `http://localhost:8000/get_image?path=${props.filePath}&edit=t&segupper=${props.segUpper}&seglower=${props.segLower}&areaupper=${props.areaUpper}&arealower=${props.areaLower}&axisratio=${props.axisRatio}&task=${props.task}`;
       }
       else{
         url = `http://localhost:8000/get_image?path=${props.filePath}&edit=f`
