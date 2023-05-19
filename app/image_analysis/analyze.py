@@ -24,13 +24,47 @@ def task1(image, upper, lower, area_upper, area_lower, axis_ratio):
     return out
 
 
-def task2(image):
+def task2(cv_image, gain):
     # convert the image to OpenCV format
-    cv_image = image
+    rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
 
+    # Calculates the mean for each colour
+    mean_red = int(np.mean(rgb_image[:, 0]))
+    mean_green = int(np.mean(rgb_image[:, 1]))
+    mean_blue = int(np.mean(rgb_image[:, 2]))
+
+    compensation = (gain * mean_red, gain * mean_green, gain * mean_blue)
+    
+    # if max(compensation) == compensation[0]:
+    #     #cluster is red
+    #     return None
+    
+    # elif max(compensation) == compensation[1]:
+    #     #cluster be blue
+    #     return None
+    
+    # elif max(compensation) == compensation[2]:
+    #     #cluster be green
+    #     return None
+    
+    cluster_clr = None
+
+    for colour in compensation:
+        if max(compensation) == colour:
+            cluster_clr = colour
+
+    
+    
+
+
+
+
+# Calculate mean color for each cluster
+    for i, cluster in enumerate(clusters):
+        mean_color = compute_mean_color(cluster)
+        print(f"Mean color for cluster {i+1}: {mean_color}")
     # perform some analysis on the image using cv2
     # for example, draw a rectangle on the image
-    cv2.rectangle(cv_image, (50, 50), (200, 200), (0, 255, 0), 2)
 
     # return the analyzed image as a NumPy array
     return cv_image
