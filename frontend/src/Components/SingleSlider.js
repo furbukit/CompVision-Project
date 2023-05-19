@@ -10,8 +10,16 @@ export default function SingleSlider({ title, start, stop, step, value, onSlider
   const stepSize = step;
 
   const marks = [];
+  let counter = 0;
+
   for (let i = minRange; i <= maxRange; i += stepSize) {
-    marks.push({ value: i, label: i.toString() });
+    const formattedValue = i.toFixed(2);
+    
+    if (counter % 5 === 0) {
+      marks.push({ value: formattedValue, label: formattedValue });
+    }
+    
+    counter++;
   }
 
   return (

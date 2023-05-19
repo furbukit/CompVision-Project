@@ -9,9 +9,9 @@ import SingleSlider from './Components/SingleSlider'
 
 export default function Task1() {
   const [selectedValue, setSelectedValue] = useState('camera 11/2022_12_15_15_51_19_927_rgb_left.png');
-  const [sliderValues1, setSliderValues1] = useState({ lowerBound: 80, upperBound: 90 });
-  const [sliderValues2, setSliderValues2] = useState({ lowerBound: 90, upperBound: 270 });
-  const [sliderValue3, setSliderValue3] = useState(0.4)
+  const [sliderValues1, setSliderValues1] = useState({ lowerBound: 30, upperBound: 90 });
+  const [sliderValues2, setSliderValues2] = useState({ lowerBound: 70, upperBound: 450 });
+  const [sliderValue3, setSliderValue3] = useState(0.35)
 
   const handleDropdownChange = (value) => {
     setSelectedValue(value);
@@ -53,7 +53,7 @@ export default function Task1() {
       <Dropdown selectedValue={selectedValue} onDropdownChange={handleDropdownChange} />
       <DualSlider title="Rough Segmentation Mask Slider" start={0} stop={255} step={10} lowerBound={sliderValues1.lowerBound} upperBound={sliderValues1.upperBound} onSliderChange={handleSliderChange1} />
       <DualSlider title="Area Threshold" start={0} stop={500} step={10} lowerBound={sliderValues2.lowerBound} upperBound={sliderValues2.upperBound} onSliderChange={handleSliderChange2} />
-      <SingleSlider title="Minor and Major Axis Ratio Threshold" start={0} stop={10} step={0.2} value={sliderValue3} onSliderChange={handleSliderChange3}/>
+      <SingleSlider title="Minor and Major Axis Ratio Threshold" start={0} stop={2} step={0.05} value={sliderValue3} onSliderChange={handleSliderChange3}/>
     </Container>
   );
 }

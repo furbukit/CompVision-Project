@@ -15,13 +15,12 @@ def task1(image, upper, lower, area_upper, area_lower, axis_ratio):
     rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
     mask_img = rough_segmentation_mask(rgb_image, upper, lower)
     connected_components, labels = connected_component_analysis(mask_img)
+    print(np.max(connected_components), np.min(connected_components))
+    print(f"labels {labels}")
     # Right up till here
-    out = filter_clusters(connected_components, area_lower, area_upper, axis_ratio)
-    print(out)
-    out = np.where(out != 0, 255, out)
+    image_out, props, nearest_clusters = filter_clusters(connected_components, area_lower, area_upper, axis_ratio)
 
-
-    return out
+    return image_out.astype(np.uint8)
 
 
 def task2(image):
