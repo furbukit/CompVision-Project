@@ -61,7 +61,7 @@ export default function DualSlider({ title, start, stop, step, lowerBound, upper
 
     const marks = [];
     for (let i = minRange; i <= maxRange; i += stepSize) {
-        if ((i - minRange) % (step*5) === 0) {
+        if ((i - minRange) % (step*20) === 0) {
             marks.push({ value: i, label: i.toString() });
           }
     }

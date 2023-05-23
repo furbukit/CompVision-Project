@@ -30,7 +30,7 @@ export default function Image(props) {
     <div>
       {imageData && (
         <div style={{ width: '100%', height: '100%' }}>
-          <img src={imageData} alt="Requested" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={imageData} alt="Awaiting Input" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
       )}
     </div>

@@ -9,15 +9,16 @@ from skimage.measure import regionprops
 
 path = os.path.abspath('app/data')
 
-def task1(image, upper, lower, area_upper, area_lower, axis_ratio):
+def task1(image, tmin, tdiff, area_upper, area_lower, axis_ratio):
     # Performs CCA on the rough segmentation mask.
     # convert the image to OpenCV format
     cv_image = cv2.imread(image)
     rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
-    mask_img = rough_segmentation_mask(rgb_image, upper, lower)
+    mask_img = rough_segmentation_mask(rgb_image, tmin, tdiff)
     connected_components, labels = connected_component_analysis(mask_img)
+    conny_components = np.copy(connected_components)
     # Right up till here
-    image_out, props, nearest_clusters = filter_clusters(connected_components, area_lower, area_upper, axis_ratio)
+    image_out, props, nearest_clusters = filter_clusters(conny_components, area_lower, area_upper, axis_ratio)
 
     return image_out, props, nearest_clusters
 
