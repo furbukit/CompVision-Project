@@ -78,17 +78,8 @@ def get_image(request):
         area_upper = int(request.GET.get('areaupper'))
         area_lower = int(request.GET.get('arealower'))
         axis_ratio = float(request.GET.get('axisratio'))
-        task = int(request.GET.get('task'))
-        if (task == 1):
-            out_fin, props, nearest_clusters = task1(image_file_path, upper, lower, area_upper, area_lower, axis_ratio)
-        if (task == 2):
-            out_fin = task2(image_file_path, upper, lower, area_upper, area_lower, axis_ratio, gain=1.1)
-        if (task == 3):
-            out1 = task1(image_file_path, upper, lower, area_upper, area_lower, axis_ratio)
-            out2 = task2(out1)
-            out_fin = task3(out2)
-        
-        pil_image = Image.fromarray(out_fin.astype(np.uint8))
+        out = task1(image_file_path, upper, lower, area_upper, area_lower, axis_ratio)
+        pil_image = Image.fromarray(out)
         image_stream = io.BytesIO()
         pil_image.save(image_stream, format='PNG')
         image_stream.seek(0)
