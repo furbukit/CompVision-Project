@@ -9,9 +9,9 @@ import SingleSlider from './Components/SingleSlider'
 
 export default function Task1() {
   const [selectedValue, setSelectedValue] = useState('camera 11/2022_12_15_15_51_19_927_rgb_left.png');
-  const [sliderValues1, setSliderValues1] = useState({ lowerBound: 30, upperBound: 90 });
-  const [sliderValues2, setSliderValues2] = useState({ lowerBound: 70, upperBound: 450 });
-  const [sliderValue3, setSliderValue3] = useState(0.35)
+  const [sliderValues1, setSliderValues1] = useState({ lowerBound: 50, upperBound: 80 });
+  const [sliderValues2, setSliderValues2] = useState({ lowerBound: 50, upperBound: 450 });
+  const [sliderValue3, setSliderValue3] = useState(0.50)
 
   const handleDropdownChange = (value) => {
     setSelectedValue(value);
@@ -45,7 +45,8 @@ export default function Task1() {
             <Image filePath={selectedValue} isEdited={true} 
                   segUpper={sliderValues1.upperBound} segLower={sliderValues1.lowerBound} 
                   areaUpper={sliderValues2.upperBound} areaLower={sliderValues2.lowerBound}
-                  axisRatio={sliderValue3}/>
+                  axisRatio={sliderValue3} 
+                  task={1}/>
           </Card>
           <br></br>
         </Grid>
