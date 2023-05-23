@@ -46,7 +46,7 @@ To exit a virtual environment just type<br>
 ## 3. Installing Requirements and Dependencies
 
 This section is for installing the frontend of the web application 
-1. Install node.js from here https://nodejs.org/en
+1. Install node.js 18.12.0 from here https://nodejs.org/en/blog/release/v18.12.0
 2. In terminal type `node -v` to check node.js is properly installed
 4. Then type `npm install -g yarn` to install the yarn package manager
 5. Verifify installation with `yarn --version`
