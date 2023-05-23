@@ -59,7 +59,7 @@ def filter_clusters(labels, min_area, max_area, axis_ratio):
 
         cv2.circle(image_rgb, (int(centroid[1]), int(centroid[0])), 5, (255, 0, 0), -1)  # Draw centroid as blue circle
         if (ellipse[1][0] != float(0)):
-            if ((ellipse[1][1]/ellipse[1][0]) > 1.6) or (area > 4000):
+            if ((ellipse[1][1]/ellipse[1][0]) > 1.85) or (area > 4000):
                 continue
             else:
                 cv2.ellipse(image_rgb, ellipse, (0, 255, 0), 2)  # Draw ellipse as green contour
