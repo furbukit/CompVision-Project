@@ -48,7 +48,7 @@ def task2(image, upper, lower, area_upper, area_lower, axis_ratio, gain=1):
         # Get the points for ellipse fitting
         ellipse = cv2.fitEllipse(points.astype(int))
 
-        if (ellipse[1][1] / ellipse[1][0]) > 1.7:
+        if (ellipse[1][1] / ellipse[1][0]) > 1.8:
             new_clusters.append(np.array([-1, -1, -1, -1, -1]))
         else:
             new_clusters.append(np.array(clust))
@@ -87,7 +87,7 @@ def task2(image, upper, lower, area_upper, area_lower, axis_ratio, gain=1):
     count = 0
     # Plot bounding rectangles for each cluster in hex_arr
     for hexagon in new_hex_arr:
-        if(hexagon[0] != -1):
+        if(hexagon[0] != -1 and hexagon[1] != -1):
             print(hexagon)
             color_string = ""
             miniest_row = np.inf
@@ -99,13 +99,12 @@ def task2(image, upper, lower, area_upper, area_lower, axis_ratio, gain=1):
             #             print(f'{attr}: {value}')
                 min_row = props[label].bbox[0]
                 min_col = props[label].bbox[1]
-                max_row = props[label].bbox[3]
-                max_col = props[label].bbox[4]
+                max_row = props[label].bbox[2]
+                max_col = props[label].bbox[3]
                 miniest_row = min(miniest_row, min_row)
                 miniest_col = min(miniest_col, min_col)
                 points = np.array([centroids[j] for j in hexagon])
                 points = np.array([[point[1], point[0]] for point in points])
-
                 # Get the points for ellipse fitting
                 ellipse = cv2.fitEllipse(points.astype(int))
 
@@ -140,7 +139,7 @@ def task2(image, upper, lower, area_upper, area_lower, axis_ratio, gain=1):
             cv2.putText(rgb_image, text, text_org, font_face, font_scale, text_color, text_thickness)
 
     unique, counts = np.unique(image_out, return_counts=True)
-    print(unique, counts)
+
     return rgb_image
 
 def task3(image):
