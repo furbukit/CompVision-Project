@@ -45,14 +45,13 @@ To exit a virtual environment just type<br>
 
 ## 3. Installing Requirements and Dependencies
 
-For some reason Django wants C++ installed on the computer beforehand so I will add that here.  
-1. install Microsoft Visual C++ 14.0 or greater from the `Microsoft C++ Build Tools` package using the following link<br>
-https://visualstudio.microsoft.com/visual-cpp-build-tools/
-2. Launch .exe file and wait for install to complete
-3. When the Visual Studio Installer GUI pops up, select 'Desktop development with C++' and Install
-4. Wait for install to complete
+This section is for installing the frontend of the web application 
+1. Install node.js from here https://nodejs.org/en
+2. In terminal type `node -v` to check node.js is properly installed
+4. Then type `npm install -g yarn` to install the yarn package manager
+5. Verifify installation with `yarn --version`
 
-We then will want to install all the requirements (python libraries in this case) so that we can run the code
+We then will want to install all the requirements for the backend (python libraries in this case) so that we can run the code (This is assuming Python is installed)
 
 To install requirements type <br>
 `pip install -r requirements.txt`
@@ -85,23 +84,17 @@ Whenever you install a new python library you will need to tell the requirements
 
 `pip freeze > requirements.txt`
 
-## 5. Working with Django
+## 5. Building Web-App
 
 Django is a high-level web framework written in Python that follows the Model-View-Controller (MVC) architectural pattern. It is designed to make it easier to build complex, database-driven web applications quickly and efficiently.
 
-All the python files for our web-app are located in ./cits4402proj1/app 
+All the backend python files for our web-app are located in ./app and all the frontend Javascript files are located in ./frontend
 
-When in the CompVision-Proejct directory, navigate into the Django project by typing the following<br>
-`cd cits4402proj1`<br>
-
-To run the app then type<br>
+When in the CompVision-Project directory, run the backend by typing<br>
 `python manage.py runserver`<br>
 
-Then go to your browser of choice and type<br>
+In a seperate terminal instance, navigate into the frontend directory and type <br>
+`yarn install` to install dependencies and then `yarn start` to start the server.  The web-app should automatically open, but if not is accessible at <br>
 `http://localhost:8000/`<br>
 
 You should now have access to the web-app! You shouldn'tneed to restart the development server  every time you make a change to the code base on VSCode, just refresh the web page to see your changes.
-
-The Hello World example that I have created is located on<br>
-`http://localhost:8000/hello`<br>
-So if when you paste that in to your browser the webpage only contains "Hello, world!" then your installation and development server are working
