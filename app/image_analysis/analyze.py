@@ -97,10 +97,11 @@ def task2(image, upper, lower, area_upper, area_lower, axis_ratio, gain=1):
             #         if not attr.startswith('__'):  # Exclude special attributes
             #             value = getattr(props[label], attr)
             #             print(f'{attr}: {value}')
+                print(props[label].bbox[0], props[label].bbox[1], props[label].bbox[2], props[label].bbox[3])
                 min_row = props[label].bbox[0]
                 min_col = props[label].bbox[1]
-                max_row = props[label].bbox[3]
-                max_col = props[label].bbox[4]
+                max_row = props[label].bbox[2]
+                max_col = props[label].bbox[3]
                 miniest_row = min(miniest_row, min_row)
                 miniest_col = min(miniest_col, min_col)
                 points = np.array([centroids[j] for j in hexagon])

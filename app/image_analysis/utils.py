@@ -32,8 +32,9 @@ def filter_clusters(labels, min_area, max_area, axis_ratio):
             labels[labels == prop.label] = 0
 
     props = skimage.measure.regionprops(labels)
+    print(f"PROPS: {type(props)}     {props}")
     centroids = np.array([prop.centroid for prop in props])
-
+    print(f"PROPS: {type(centroids)}     {centroids}")
     # Calculate pairwise distances between centroids
     distances = cdist(centroids, centroids)
     
@@ -45,8 +46,6 @@ def filter_clusters(labels, min_area, max_area, axis_ratio):
     # Draw centroids and ellipses on the image
     image_rgb = cv2.cvtColor(labels.astype(np.uint8), cv2.COLOR_GRAY2RGB)
 
-    props = skimage.measure.regionprops(image_rgb)
-
     for i, prop in enumerate(props):
         centroid = prop.centroid
 
@@ -54,11 +53,15 @@ def filter_clusters(labels, min_area, max_area, axis_ratio):
         points = np.array([[point[1], point[0]] for point in points])
         # Get the points for ellipse fitting
         ellipse = cv2.fitEllipse(points.astype(int))
+        semi_major_axis = max(ellipse[1][0], ellipse[1][1]) / 2.0
+        semi_minor_axis = min(ellipse[1][0], ellipse[1][1]) / 2.0
+        area = np.pi * semi_major_axis * semi_minor_axis
 
         cv2.circle(image_rgb, (int(centroid[1]), int(centroid[0])), 5, (255, 0, 0), -1)  # Draw centroid as blue circle
-        if (ellipse[1][1]/ellipse[1][0]) > 1.7:
-            continue
-        else:
-            cv2.ellipse(image_rgb, ellipse, (0, 255, 0), 2)  # Draw ellipse as green contour
+        if (ellipse[1][0] != float(0)):
+            if ((ellipse[1][1]/ellipse[1][0]) > 1.6) or (area > 4000):
+                continue
+            else:
+                cv2.ellipse(image_rgb, ellipse, (0, 255, 0), 2)  # Draw ellipse as green contour
 
     return (image_rgb, props, nearest_clusters)
